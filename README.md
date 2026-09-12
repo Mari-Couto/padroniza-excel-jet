@@ -3,6 +3,8 @@
 > Conversor online inteligente para padronização e limpeza automática de dados em arquivos Excel
 > 
 > **🌍 Site ao vivo:** https://Mari-Couto.github.io/padroniza-excel-jet
+>
+> **API:** https://padroniza-excel-jet.vercel.app
 
 ## 🎯 Objetivo
 
@@ -16,19 +18,27 @@ O **Padroniza Excel Jet** é uma aplicação web que permite:
 ## 🚀 Deploy Automático
 
 Cada push em `main` faz deploy automático:
-- ✅ Frontend: GitHub Pages (gratuito)
-- ✅ Backend: Vercel/Render (gratuito com limitações)
+- ✅ **Frontend:** GitHub Pages (gratuito)
+- ✅ **Backend:** Vercel (gratuito)
+
+## 🌐 Acessar Online
+
+```
+Frontend: https://Mari-Couto.github.io/padroniza-excel-jet
+API:      https://padroniza-excel-jet.vercel.app
+Docs API: https://padroniza-excel-jet.vercel.app/docs
+```
 
 ## 🏗️ Arquitetura
 
 ```
-Acesso: https://Mari-Couto.github.io/padroniza-excel-jet
+https://Mari-Couto.github.io/padroniza-excel-jet
                     ↓
             React Frontend
                     ↓
-            Chamar API Backend
+        POST /convert (Vercel API)
                     ↓
-        Vercel/Render/Railway
+    https://padroniza-excel-jet.vercel.app
                     ↓
             Processar Excel
                     ↓
@@ -44,12 +54,13 @@ Acesso: https://Mari-Couto.github.io/padroniza-excel-jet
 - ✅ Download instantâneo
 - ✅ Sem armazenamento de dados
 - ✅ Conversão rápida
-- ✅ Deploy automático no GitHub
+- ✅ Deploy automático
 
 ## 📚 Documentação
 
 - [Setup Local](./docs/setup.md)
 - [Arquitetura](./docs/architecture.md)
+- [Vercel Setup](./docs/VERCEL_SETUP.md)
 - [Contribuição](./CONTRIBUTING.md)
 
 ## 🛠️ Setup Local
@@ -69,38 +80,52 @@ uvicorn main:app --reload
 # Frontend (outra aba)
 cd frontend
 npm install
-npm start
+REACT_APP_API_URL=http://localhost:8000 npm start
 ```
 
 Acesse: http://localhost:3000
 
-## 🌐 Deploy Online
+## 🔧 Configurar Vercel (Rápido)
 
-### Opção 1: GitHub Pages + Vercel (Recomendado)
-
-1. **Frontend automático** no GitHub Pages
-2. **Backend** no Vercel (serverless)
-
+### 1. Instale Vercel CLI
 ```bash
-# Apenas push para main
+npm i -g vercel
+```
+
+### 2. Conecte seu projeto
+```bash
+vercel link
+```
+
+### 3. Configure GitHub Secrets
+
+**Gere token Vercel:**
+```bash
+vercel tokens create
+```
+
+**Adicione no GitHub (Settings → Secrets and variables → Actions):**
+```
+VERCEL_TOKEN=<seu-token>
+VERCEL_ORG_ID=<seu-org-id>
+VERCEL_PROJECT_ID=<seu-project-id>
+```
+
+### 4. Configure GitHub Pages
+1. **Settings → Pages**
+2. **Source:** Deploy from a branch
+3. **Branch:** gh-pages
+
+### 5. Faça push
+```bash
 git push origin main
 ```
 
-### Opção 2: GitHub Pages + Railway
+✅ Deploy automático começa!
 
-Railway oferece $5/mês grátis
+## 📖 Referência Completa
 
-```bash
-railway login
-railway link
-railway up
-```
-
-### Opção 3: Google Cloud Run
-
-```bash
-gcloud app deploy backend/app.yaml
-```
+Veja [VERCEL_SETUP.md](./docs/VERCEL_SETUP.md) para instruções detalhadas.
 
 ## 📝 Licença
 
@@ -112,4 +137,4 @@ MIT
 
 ---
 
-**⚡ Feito com ❤️ - Deploy Automático no GitHub!**
+**⚡ Deploy automático com Vercel + GitHub Pages!**
